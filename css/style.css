@@ -1,0 +1,389 @@
+/* ====================================================
+   Variables & Theme Setup
+   ==================================================== */
+:root {
+    --bs-body-bg: #141013;
+    --bs-body-color: #f1e8ec; /* ปรับเพิ่มความสว่างให้อ่านง่ายขึ้น */
+    --dusty-rose: #c97b84;
+    --dusty-rose-dark: #a85e68;
+    --dusty-rose-light: #f0b8bf; /* ปรับสว่างขึ้นเล็กน้อย */
+    --dark-card: #1d171a;
+    --dark-card-border: #3d3036;
+    --text-muted-custom: #c7b8be; /* ปรับข้อความจางให้อ่านชัดขึ้น */
+}
+
+/* ====================================================
+   Base & Typography Styles
+   ==================================================== */
+body.intro-active {
+    overflow: hidden; /* ป้องกันการเลื่อนหน้าจอขณะเปิดหน้า Intro */
+}
+
+body {
+    font-family: 'Prompt', sans-serif;
+    background-color: var(--bs-body-bg);
+    color: var(--bs-body-color);
+    overflow-x: hidden;
+    line-height: 1.8;
+}
+
+h1, h2, h3, h4, h5, h6, .font-serif {
+    font-family: 'Cormorant Garamond', 'Prompt', serif;
+}
+
+/* Override Bootstrap Utility Classes for Better High Contrast */
+.text-muted {
+    color: #bfaeb6 !important;
+}
+
+.text-secondary {
+    color: #d1c4ca !important;
+}
+
+/* Text Utility Helpers */
+.jp-title {
+    white-space: nowrap;
+    word-break: keep-all;
+}
+
+.hero-title-jp {
+    font-size: clamp(1.8rem, 4vw, 3.2rem);
+}
+
+.hero-subtitle-en {
+    color: var(--dusty-rose-light) !important;
+}
+
+.text-description-max {
+    max-width: 620px;
+}
+
+.stat-box-container {
+    max-width: 550px;
+}
+
+.tag-yuri {
+    color: var(--dusty-rose-light);
+}
+
+.store-logo {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+}
+
+.toast-container-custom {
+    z-index: 11;
+}
+
+/* ====================================================
+   1. Intro Screen Overlay
+   ==================================================== */
+#intro-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #0e0b0d;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    transition: opacity 1.2s ease, visibility 1.2s ease;
+}
+
+#intro-overlay.fade-out {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.intro-content {
+    max-width: 720px;
+    animation: introPopIn 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@keyframes introPopIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.intro-title {
+    font-size: clamp(1.6rem, 4.5vw, 3rem);
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.intro-subtitle {
+    color: var(--dusty-rose-light);
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.intro-quote-box {
+    background: rgba(29, 23, 26, 0.8);
+    border-left: 3px solid var(--dusty-rose);
+    padding: 1.25rem 1.5rem;
+    border-radius: 0 0.5rem 0.5rem 0;
+    margin: 0 auto 2rem auto;
+    max-width: 600px;
+    text-align: center;
+}
+
+.intro-quote-text {
+    color: #ffffff;
+    font-family: 'Cormorant Garamond', 'Prompt', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    line-height: 1.8;
+}
+
+.btn-enter-site {
+    background-color: transparent;
+    border: 1px solid var(--dusty-rose);
+    color: var(--dusty-rose-light);
+    padding: 0.75rem 2.5rem;
+    border-radius: 50rem;
+    font-size: 1.05rem;
+    letter-spacing: 1px;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-enter-site:hover {
+    background-color: var(--dusty-rose);
+    color: #fff;
+    box-shadow: 0 0 25px rgba(201, 123, 132, 0.4);
+    transform: translateY(-2px);
+}
+
+/* ====================================================
+   2. Scroll Animations & Effects
+   ==================================================== */
+.fade-in-element {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: opacity, transform;
+}
+
+.fade-in-element.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@keyframes softPulse {
+    0% { box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
+    50% { box-shadow: 0 15px 35px rgba(201, 123, 132, 0.25); }
+    100% { box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
+}
+
+/* ====================================================
+   3. Navbar Component
+   ==================================================== */
+.navbar-custom {
+    background-color: rgba(20, 16, 19, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--dark-card-border);
+    transition: all 0.3s ease;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    color: var(--dusty-rose-light) !important;
+    letter-spacing: 0.5px;
+}
+
+.nav-link {
+    color: #e0d5da !important;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--dusty-rose-light) !important;
+}
+
+/* ====================================================
+   4. Buttons Style
+   ==================================================== */
+.btn-dusty {
+    background-color: var(--dusty-rose);
+    color: #fff;
+    border: none;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.btn-dusty:hover {
+    background-color: var(--dusty-rose-dark);
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(201, 123, 132, 0.35);
+}
+
+.btn-outline-dusty {
+    border: 1px solid var(--dusty-rose);
+    color: var(--dusty-rose-light);
+    background: transparent;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.btn-outline-dusty:hover {
+    background-color: var(--dusty-rose);
+    color: #fff;
+    border-color: var(--dusty-rose);
+    transform: translateY(-2px);
+}
+
+/* ====================================================
+   5. Hero Section
+   ==================================================== */
+.hero-section {
+    padding-top: 8rem;
+    padding-bottom: 5rem;
+    border-bottom: 1px solid var(--dark-card-border);
+    background: radial-gradient(circle at top right, rgba(201, 123, 132, 0.15), transparent 55%);
+}
+
+.hero-badge {
+    display: inline-block;
+    padding: 0.35rem 1rem;
+    background: rgba(201, 123, 132, 0.15);
+    border: 1px solid var(--dusty-rose);
+    color: var(--dusty-rose-light);
+    border-radius: 50rem;
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+}
+
+/* ====================================================
+   6. Cards & Containers
+   ==================================================== */
+.card-custom {
+    background-color: var(--dark-card);
+    border: 1px solid var(--dark-card-border);
+    border-radius: 1rem;
+    transition: border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.card-custom:hover {
+    border-color: var(--dusty-rose);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+.buy-card {
+    background-color: rgba(29, 23, 26, 0.9);
+    border: 1px solid var(--dark-card-border);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.buy-card:hover {
+    border-color: var(--dusty-rose);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    background-color: var(--dark-card);
+}
+
+/* ====================================================
+   7. Media & Decorative Elements
+   ==================================================== */
+.section-title {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -8px;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 2px;
+    background-color: var(--dusty-rose);
+}
+
+.cover-frame {
+    max-width: 330px;
+    border-radius: 0.75rem;
+    border: 1px solid var(--dark-card-border);
+    animation: softPulse 6s infinite ease-in-out;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.cover-frame:hover {
+    transform: scale(1.03) rotate(0.5deg);
+}
+
+.cover-frame-sm {
+    max-width: 200px;
+    border-radius: 0.5rem;
+    border: 1px solid var(--dark-card-border);
+    transition: transform 0.3s ease;
+}
+
+.cover-frame-sm:hover {
+    transform: scale(1.03);
+}
+
+/* ====================================================
+   8. Footer Section
+   ==================================================== */
+footer {
+    background-color: #0d0a0c;
+    border-top: 1px solid var(--dark-card-border);
+    color: var(--text-muted-custom);
+    position: relative;
+}
+
+.footer-quote-box {
+    background: linear-gradient(135deg, rgba(35, 25, 30, 0.9) 0%, rgba(20, 16, 19, 0.9) 100%);
+    border: 1px solid var(--dusty-rose-dark);
+    border-left: 4px solid var(--dusty-rose);
+    border-radius: 0.75rem;
+    padding: 2rem 2.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    max-width: 780px;
+    margin: 0 auto 2.5rem auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer-quote-box::before {
+    content: '“';
+    font-family: 'Cormorant Garamond', serif;
+    position: absolute;
+    top: -20px;
+    right: 20px;
+    font-size: 8rem;
+    color: rgba(201, 123, 132, 0.08);
+    line-height: 1;
+    pointer-events: none;
+}
+
+.footer-quote-text {
+    color: #ffffff;
+    font-family: 'Cormorant Garamond', 'Prompt', serif;
+    font-size: 1.35rem;
+    font-weight: 500;
+    line-height: 1.8;
+    letter-spacing: 0.3px;
+}
